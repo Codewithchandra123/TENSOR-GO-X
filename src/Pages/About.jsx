@@ -27,19 +27,19 @@ const teamMembers = [
     name: "Srini Chilukuri",
     title: "Founder & CEO",
     image: SriniImage,
-    linkedin: "https://www.linkedin.com/in/srinichilukuri/"
+    linkedin: "https://www.linkedin.com/in/srinivaschilukuri?miniProfileUrn=urn%3Ali%3Afsd_profile%3AACoAAADF3igBhc1zS3q5XgjWFCti8PzNQnA2EjY&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3Bux0jObZJR%2F2FQFIa9%2FOZ6g%3D%3D"
   },
   {
     name: "Lakshmi Chilukuri",
     title: "Co-Founder & MD",
     image: LakshmiImage,
-    linkedin: "#"
+    linkedin: "https://www.linkedin.com/in/lakshmi-chilukuri-8a1937156/overlay/about-this-profile/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BS1rr8wXrRKGkcV6YTXCEnQ%3D%3D"
   },
   {
     name: "Pallavi Mishra",
     title: "CHRO",
     image: PallaviImage,
-    linkedin: "#"
+    linkedin: "https://www.linkedin.com/in/pallavim770/overlay/about-this-profile/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BMjZYNLNlRWS2%2BFNEEd6VWg%3D%3D"
   },
 ];
 
