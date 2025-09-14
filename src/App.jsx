@@ -25,7 +25,7 @@ function App() {
     <>
       <ScrollToTop />
       <Header />
-      <main className="min-h-screen p-6 bg-neutral-light-gray flex-grow">
+{/*       <main className="min-h-screen p-6 bg-neutral-light-gray flex-grow"> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -40,7 +40,7 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
         </Routes>
-      </main>
+{/*       </main> */}
       <Footer />
     </>
   );
