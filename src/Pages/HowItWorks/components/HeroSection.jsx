@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FiArrowRight } from 'react-icons/fi';
+import { Link } from "react-router-dom"; 
 
 // Animation variants for the main container to stagger children
 const containerVariants = {
@@ -62,6 +63,7 @@ const HeroSection = () => {
   return (
     // Section container: full-screen, flex-centered layout
     <section className="relative w-full min-h-screen flex items-center justify-center px-6 md:px-12 lg:px-24 py-20 overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-800 font-inter text-white">
+      
       {/* Animated background gradient shapes for depth */}
       <div className="absolute inset-0 z-0 opacity-30">
         <motion.div
@@ -108,10 +110,10 @@ const HeroSection = () => {
           className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-white"
           variants={itemVariants}
         >
-          Go-X in Action<br></br> Simple Setup, Powerful Insights
+          Go-X in Action<br /> Simple Setup, Powerful Insights
         </motion.h1>
 
-        {/* Subheading: Color changed to white */}
+        {/* Subheading */}
         <motion.p
           className="mt-6 text-lg md:text-xl text-white/90 max-w-3xl"
           variants={itemVariants}
@@ -121,24 +123,26 @@ const HeroSection = () => {
 
         {/* Call-to-Action Button: Improved hover animation */}
         <motion.div variants={itemVariants} className="mt-10">
-          <motion.button
-            className="group flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-500 to-blue-600 text-white font-semibold rounded-2xl shadow-lg transition-shadow duration-300 ease-in-out hover:shadow-2xl"
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-            initial="rest"
-            animate="rest"
-          >
-            <span>Get Started Now</span>
-            <motion.div
-              className="overflow-hidden flex items-center justify-center"
-              variants={arrowVariants}
+          <Link to="/pricing"> {/* ✅ Routing assigned here */}
+            <motion.button
+              className="group flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-500 to-blue-600 text-white font-semibold rounded-2xl shadow-lg transition-shadow duration-300 ease-in-out hover:shadow-2xl"
+              variants={buttonVariants}
+              whileHover="hover"
+              whileTap="tap"
+              initial="rest"
+              animate="rest"
             >
-              <FiArrowRight className="ml-1" />
-            </motion.div>
-          </motion.button>
+              <span>Get Started Now</span>
+              <motion.div
+                className="overflow-hidden flex items-center justify-center"
+                variants={arrowVariants}
+              >
+                <FiArrowRight className="ml-1" />
+              </motion.div>
+            </motion.button>
+          </Link>
         </motion.div>
-      </motion.div>
+      </motion.div> {/* ✅ closed motion.div properly */}
     </section>
   );
 };

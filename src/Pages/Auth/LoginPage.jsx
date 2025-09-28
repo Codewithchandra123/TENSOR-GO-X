@@ -95,7 +95,7 @@ const LoginPage = () => {
                     <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-indigo-400">
                         Welcome Back
                     </h1>
-                    <p className="text-lg text-slate-300 mt-2">Log in to the AI - Analysis Console</p>
+                    <p className="text-lg text-slate-300 mt-2">Login to the AI - Analysis Console</p>
                 </motion.div>
 
                 {error && <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-red-400 text-center font-medium bg-red-900/30 p-3 rounded-lg border border-red-800">{error}</motion.p>}
@@ -111,7 +111,7 @@ const LoginPage = () => {
                     </div>
 
                     <motion.button type="submit" className="w-full px-6 py-3 font-semibold text-lg bg-gradient-to-r from-sky-500 to-indigo-500 rounded-xl shadow-lg transform transition" whileHover={{ scale: 1.05, boxShadow: '0px 0px 15px rgba(56, 189, 248, 0.5)' }} whileTap={{ scale: 0.95 }}>
-                        Log In
+                        LogIn
                     </motion.button>
                 </motion.form>
 
