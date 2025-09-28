@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaLock, FaUserShield, FaServer, FaHandshake, FaQuestionCircle } from 'react-icons/fa';
-import AccordionItem from '../components/AccordionItem'; // Make sure this path is correct
+import AccordionItem from '../Components/AccordionItem'; // Make sure this path is correct
 
 const Privacy = () => {
   return (
