@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaFileContract, FaGavel, FaShieldAlt, FaUserCheck, FaBan, FaHeadset } from 'react-icons/fa';
-import AccordionItem from '../components/AccordionItem';
+import AccordionItem from '../Components/AccordionItem';
 
 const Terms = () => {
   return (
