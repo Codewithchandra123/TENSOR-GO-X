@@ -1,0 +1,82 @@
+/* src/Pages/Careers/components/CoreValuesSection.css */
+
+/* --- Main Section Background --- */
+.core-values-section {
+  background: linear-gradient(145deg, #020617 0%, #030d3b 50%, #111827 100%);
+  overflow: hidden;
+}
+
+/* --- Wrapper for 3D Perspective --- */
+.value-card-wrapper {
+  perspective: 1000px;
+  position: relative; /* Needed for the pseudo-element */
+  border-radius: 1.25rem; /* Match the card's border-radius */
+}
+
+/* --- Glassmorphism Card Style --- */
+.value-card {
+  position: relative;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 1.25rem; /* rounded-2xl */
+  height: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  /* Smoother transition for the 3D tilt */
+  transition: transform 0.3s ease-out;
+  transform-style: preserve-3d;
+}
+
+/* --- FIX 2: Interactive Gradient Glow on Hover --- */
+/* This pseudo-element creates the border effect */
+.value-card-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit; /* Match the wrapper's radius */
+  padding: 2px; /* This padding creates the border thickness */
+  
+  /* The dynamic gradient using CSS variables passed from the component */
+  background: linear-gradient(135deg, var(--glow-color-from), var(--glow-color-to));
+  
+  -webkit-mask: 
+     linear-gradient(#fff 0 0) content-box, 
+     linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude; 
+  
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+  animation: gradient-spin 4s linear infinite;
+  background-size: 200% 200%;
+}
+
+.value-card-wrapper:hover::before {
+  opacity: 1;
+}
+
+/* The animation for the moving gradient */
+@keyframes gradient-spin {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+/* --- Icon Wrapper Style --- */
+.icon-wrapper {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+}

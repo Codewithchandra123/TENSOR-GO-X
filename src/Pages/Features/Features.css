@@ -1,0 +1,86 @@
+/* src/Pages/Features/Features.css */
+
+/* --- Professional Glitch Effect --- */
+.glitch-container {
+  position: relative;
+  cursor: pointer;
+}
+.glitch-text {
+  display: inline-block;
+  position: relative;
+}
+.glitch-container .glitch-text::before,
+.glitch-container .glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  clip-path: inset(0 0 0 0);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.glitch-container:hover .glitch-text::before,
+.glitch-container:hover .glitch-text::after {
+    opacity: 1;
+}
+.glitch-container .glitch-text::before {
+  left: -2px;
+  text-shadow: 2px 0 #8b5cf6; /* violet */
+  animation: glitch-anim-1 1.5s infinite linear alternate-reverse;
+}
+.glitch-container .glitch-text::after {
+  left: 2px;
+  text-shadow: -2px 0 #0ea5e9; /* sky */
+  animation: glitch-anim-2 2s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+  0%, 100% { clip-path: inset(45% 0 50% 0); }
+  25% { clip-path: inset(10% 0 85% 0); }
+  50% { clip-path: inset(60% 0 30% 0); }
+  75% { clip-path: inset(20% 0 70% 0); }
+}
+@keyframes glitch-anim-2 {
+  0%, 100% { clip-path: inset(80% 0 10% 0); }
+  25% { clip-path: inset(30% 0 65% 0); }
+  50% { clip-path: inset(5% 0 90% 0); }
+  75% { clip-path: inset(70% 0 20% 0); }
+}
+
+/* --- Blob Animation --- */
+@keyframes blob {
+  0% { transform: scale(1) translate(0, 0); }
+  33% { transform: scale(1.1) translate(30px, -50px); }
+  66% { transform: scale(0.9) translate(-20px, 20px); }
+  100% { transform: scale(1) translate(0, 0); }
+}
+.animate-blob { animation: blob 8s infinite ease-in-out; }
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }
+
+/* --- General Animations --- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0; /* Start hidden */
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-scale-in { animation: scaleIn 0.8s ease-out forwards; }
+
+@keyframes pulseSlow {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+  50% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(255, 255, 255, 0); }
+}
+.animate-pulse-slow {
+  animation: pulseSlow 3s infinite ease-in-out;
+}

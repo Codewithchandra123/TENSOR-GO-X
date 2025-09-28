@@ -1,0 +1,119 @@
+/* src/Pages/InterviewDemo/InterviewDemo.css */
+
+/* --- PROFESSIONAL DARK THEME --- */
+:root {
+  --bg-primary: #020617;       /* Richer, darker navy background */
+  --bg-secondary: #0f172a;     /* Dark slate for cards and surfaces */
+  --text-primary: #e2e8f0;     /* Soft white for primary text (easy on the eyes) */
+  --text-secondary: #94a3b8;   /* Lighter gray for secondary text */
+  --text-accent: #06b6d4;      /* Vibrant Cyan accent */
+  --border-primary: #1e293b;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --success-color: #22c55e;    /* Green for success states */
+  --warning-color: #f97316;    /* Orange for warnings */
+  --danger-color: #ef4444;     /* Red for alerts */
+  --glow-color: rgba(6, 182, 212, 0.4); /* Glow effect for cyan buttons */
+}
+
+/* --- GLOBAL & LAYOUT STYLES --- */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif; /* A modern, professional font choice */
+}
+
+/* --- ANIMATIONS & EFFECTS --- */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes scan {
+  0% { top: -5%; }
+  100% { top: 105%; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 5px var(--glow-color), 0 0 10px var(--glow-color); }
+  50% { box-shadow: 0 0 20px var(--glow-color), 0 0 30px var(--glow-color); }
+  100% { box-shadow: 0 0 5px var(--glow-color), 0 0 10px var(--glow-color); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* --- COMPONENT STYLES --- */
+
+/* Loader remains the same, it's already good */
+.loader {
+  border: 4px solid rgba(125, 211, 252, 0.3);
+  border-left-color: var(--text-accent);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+/* HUD elements are enhanced for a cleaner look */
+.scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to bottom, transparent, rgba(6, 182, 212, 0.4), transparent);
+  animation: scan 4s linear infinite;
+  opacity: 0.7;
+  z-index: 10;
+}
+
+.hud-grid {
+  background-image: linear-gradient(rgba(100, 116, 139, 0.1) 1px, transparent 1px), linear-gradient(to right, rgba(100, 116, 139, 0.1) 1px, transparent 1px);
+  background-size: 2.5rem 2.5rem; /* Slightly larger grid for a cleaner look */
+}
+
+/* --- NEW: Proctoring / Anti-Cheating Warning Style --- */
+.proctoring-warning {
+  position: fixed;
+  top: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  
+  color: var(--text-primary);
+  background-color: rgba(239, 68, 68, 0.2); /* Semi-transparent red */
+  border: 1px solid var(--danger-color);
+  
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+
+  /* A subtle pulse animation to draw attention */
+  animation: pulse-border 1.5s infinite;
+}
+
+@keyframes pulse-border {
+  0% { border-color: var(--danger-color); }
+  50% { border-color: rgba(239, 68, 68, 0.5); }
+  100% { border-color: var(--danger-color); }
+}

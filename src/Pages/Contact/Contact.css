@@ -1,0 +1,118 @@
+/* src/Pages/Contact/Contact.css */
+
+/* Animated "Aurora" Gradient Background */
+.contact-page-background {
+  background: linear-gradient(-45deg, #0f172a, #1e1b4b, #4c1d95, #4f46e5);
+  background-size: 400% 400%;
+  animation: gradientBG 20s ease infinite;
+  overflow-x: hidden;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Main Glassmorphic Card Container */
+.glass-card {
+  background: rgba(30, 27, 75, 0.4); /* Semi-transparent indigo background */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1.5rem; /* 24px */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Form Input Styling */
+.contact-input {
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 0.875rem 1rem; /* 14px 16px */
+  background-color: rgba(15, 23, 42, 0.5); /* bg-slate-900/50 */
+  border: 1px solid rgba(148, 163, 184, 0.3); /* border-slate-400/30 */
+  border-radius: 0.5rem; /* 8px */
+  color: #f8fafc; /* text-slate-50 */
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.contact-input::placeholder {
+  color: #64748b; /* text-slate-500 */
+}
+
+.contact-input:focus {
+  outline: none;
+  border-color: #5eead4; /* a vibrant teal color */
+  box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.3);
+}
+
+/* Form Submit Button */
+.contact-button {
+  width: 100%;
+  background-image: linear-gradient(to right, #6d28d9 0%, #4f46e5 50%, #2563eb 100%);
+  background-size: 200% auto;
+  color: white;
+  font-weight: bold;
+  padding: 0.875rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.4s ease-out;
+  box-shadow: 0 4px 15px 0 rgba(79, 70, 229, 0.4);
+  border: none;
+}
+
+.contact-button:hover:not(:disabled) {
+  background-position: right center;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+}
+
+.contact-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Interactive Link Style */
+.animated-link {
+  font-weight: 600;
+  color: #a5b4fc; /* indigo-300 */
+  background-image: linear-gradient(90deg, #a5b4fc, #5eead4);
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  transition: background-size 0.4s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.animated-link:hover {
+  background-size: 100% 2px;
+}
+
+/* Styling for Contact Detail Items on the right */
+.contact-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem; /* 20px */
+}
+
+.contact-icon-wrapper {
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border-radius: 50%;
+  padding: 0.75rem; /* 12px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.contact-detail-item:hover .contact-icon-wrapper {
+    transform: scale(1.15) rotate(-10deg);
+}
+
+.contact-icon {
+  color: white;
+  font-size: 1.5rem; /* 24px */
+}

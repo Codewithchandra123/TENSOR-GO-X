@@ -1,17 +1,24 @@
-// import React from 'react';
-// import { Navigate } from 'react-router-dom';
-// import { useAuth } from '../Context/AuthContext';
+import React from 'react';
+import { Navigate } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../firebase';
 
-// const ProtectedRoute = ({ children }) => {
-//   const { user } = useAuth();
+// Install this helper library: npm install react-firebase-hooks
+const ProtectedRoute = ({ children }) => {
+    const [user, loading, error] = useAuthState(auth);
 
-//   if (!user) {
-//     // If user is not logged in, redirect to the login page
-//     return <Navigate to="/login" />;
-//   }
+    if (loading) {
+        // You can add a loading spinner here
+        return <div>Loading...</div>;
+    }
 
-//   // If user is logged in, render the child component
-//   return children;
-// };
+    if (!user) {
+        // If user is not logged in, redirect to the login page
+        return <Navigate to="/login" />;
+    }
 
-// export default ProtectedRoute;
+    // If user is logged in, render the child components
+    return children;
+};
+
+export default ProtectedRoute;

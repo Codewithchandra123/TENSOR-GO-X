@@ -1,0 +1,82 @@
+/* src/Pages/Careers/Careers.css */
+
+/* Blob Animation for Hero */
+@keyframes blob {
+  0% { transform: scale(1) translate(0, 0); }
+  33% { transform: scale(1.1) translate(30px, -50px); }
+  66% { transform: scale(0.9) translate(-20px, 20px); }
+  100% { transform: scale(1) translate(0, 0); }
+}
+.animate-blob { animation: blob 8s infinite ease-in-out; }
+.animation-delay-2000 { animation-delay: 2s; }
+
+/* General Fade-in Animation */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+/* Value Card specific styles */
+.value-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.value-card:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+}
+.icon-wrapper {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    border-radius: 9999px; /* rounded-full */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.25rem; /* text-4xl */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Gradient CTA Button from Navbar for consistency */
+.cta-button {
+  display: inline-block;
+  background-image: linear-gradient(to right, #0ea5e9 0%, #6366f1 50%, #8b5cf6 100%);
+  background-size: 200% auto;
+  color: white;
+  font-weight: 600;
+  padding: 0.6rem 1.5rem;
+  border-radius: 9999px;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 4px 15px 0 rgba(14, 165, 233, 0.3);
+  border: none;
+}
+.cta-button:hover {
+  background-position: right center;
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(139, 92, 246, 0.25);
+}
+
+/* 
+  Utility classes for dynamic colors.
+  This is a common workaround for Tailwind CSS, which cannot generate
+  dynamic class names like `bg-${color}-100` at build time.
+*/
+.from-sky-400 { --tw-gradient-from: #38bdf8; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(56, 189, 248, 0)); }
+.to-sky-600 { --tw-gradient-to: #0284c7; }
+.bg-sky-100 { background-color: #e0f2fe; }
+.text-sky-600 { color: #0284c7; }
+.from-indigo-400 { --tw-gradient-from: #818cf8; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(129, 140, 248, 0)); }
+.to-indigo-600 { --tw-gradient-to: #4f46e5; }
+.bg-indigo-100 { background-color: #e0e7ff; }
+.text-indigo-600 { color: #4f46e5; }
+.from-violet-400 { --tw-gradient-from: #a78bfa; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(167, 139, 250, 0)); }
+.to-violet-600 { --tw-gradient-to: #7c3aed; }
+.from-pink-400 { --tw-gradient-from: #f472b6; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(244, 114, 182, 0)); }
+.to-pink-600 { --tw-gradient-to: #db2777; }
+.from-amber-400 { --tw-gradient-from: #fbbf24; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(251, 191, 36, 0)); }
+.to-amber-600 { --tw-gradient-to: #d97706; }
+.from-rose-400 { --tw-gradient-from: #fb7185; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(251, 113, 133, 0)); }
+.to-rose-600 { --tw-gradient-to: #e11d48; }

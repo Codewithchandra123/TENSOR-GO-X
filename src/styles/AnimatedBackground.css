@@ -1,0 +1,62 @@
+/* src/styles/AnimatedBackground.css */
+.stars-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000 url('https://www.transparenttextures.com/patterns/stardust.png');
+  z-index: -2;
+}
+
+.twinkling {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent url('https://www.transparenttextures.com/patterns/twinkles.png') repeat top center;
+  background-size: 1500px 1500px;
+  z-index: -1;
+  /* ✅ Using the new, more advanced animation */
+  animation: combined-star-effect 200s linear infinite;
+}
+
+/* ✅ NEW KEYFRAMES: Combines slow blinking (opacity), glitching (transform), and parallax (background-position) */
+@keyframes combined-star-effect {
+    0% {
+        opacity: 0.6;
+        transform: translate(0, 0);
+        background-position: 0 0;
+    }
+    15% {
+        opacity: 0.9;
+        transform: translate(-5px, 5px);
+    }
+    30% { /* A sharp, quick blink */
+        opacity: 0.3;
+    }
+    31% {
+        opacity: 1;
+        transform: translate(5px, -5px);
+    }
+    50% {
+        opacity: 0.6;
+        transform: translate(10px, 10px);
+    }
+    70% {
+        opacity: 0.8;
+    }
+    85% { /* Another sharp blink */
+        opacity: 0.4;
+        transform: translate(-5px, -10px);
+    }
+    86% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
+        transform: translate(0, 0);
+        background-position: -10000px 5000px;
+    }
+}

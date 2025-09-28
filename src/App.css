@@ -4,7 +4,15 @@
   padding: 2rem;
   text-align: center;
 }
+/* src/index.css */
 
+body {
+  margin: 0; /* ✅ Removes the default margin from the browser */
+  font-family: 'Inter', 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #0f172a; /* Optional: set a base background color */
+}
 .logo {
   height: 6em;
   padding: 1.5em;

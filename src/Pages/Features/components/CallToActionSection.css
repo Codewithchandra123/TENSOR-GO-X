@@ -1,0 +1,92 @@
+/* src/Pages/Features/components/CallToActionSection.css */
+
+/* --- Color & Background --- */
+.cta-section {
+  /* Modern dark gradient background */
+  background: linear-gradient(135deg, #0f172a, #0b2a5c, #1e40af, #4f46e5);
+  background-size: 400% 400%;
+  animation: animated-gradient 15s ease infinite;
+}
+
+@keyframes animated-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* --- Effects & Motion (Floating Blobs) --- */
+/* This adapts the .animate-blob styles into a more professional pseudo-element effect */
+.cta-section::before,
+.cta-section::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: screen; /* Creates a beautiful effect on dark backgrounds */
+  filter: blur(70px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.cta-section::before {
+  width: 350px;
+  height: 350px;
+  background-color: rgba(99, 102, 241, 0.2); /* Indigo */
+  top: 10%;
+  left: 15%;
+  animation: blob 20s infinite ease-in-out alternate;
+}
+
+.cta-section::after {
+  width: 300px;
+  height: 300px;
+  background-color: rgba(59, 130, 246, 0.2); /* Blue */
+  bottom: 15%;
+  right: 20%;
+  animation: blob 25s infinite ease-in-out alternate-reverse;
+}
+
+@keyframes blob {
+  from { transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); }
+  to { transform: translateY(40px) translateX(-30px) rotate(180deg) scale(1.1); }
+}
+
+/* Ensure content is stacked above the background effects */
+.cta-section > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Buttons & Interactivity --- */
+.primary-cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.5rem; /* py-4 px-10 */
+  font-weight: 700; /* bold */
+  font-size: 1.125rem; /* text-lg */
+  color: white;
+  background-image: linear-gradient(to right, #6366f1, #3b82f6); /* from-indigo-500 to-blue-600 */
+  border-radius: 1rem; /* rounded-2xl */
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3), 0 6px 6px rgba(99, 102, 241, 0.2);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth, professional transition */
+  position: relative;
+  overflow: hidden; /* Important for the arrow effect */
+}
+
+.primary-cta-button:hover {
+  transform: scale(1.10);
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4), 0 15px 15px rgba(99, 102, 241, 0.3);
+}
+
+/* The arrow that appears and slides in on hover */
+.button-arrow {
+  margin-left: 0.75rem; /* ml-3 */
+  transform: translateX(-20px);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.primary-cta-button:hover .button-arrow {
+  transform: translateX(0);
+  opacity: 1;
+}

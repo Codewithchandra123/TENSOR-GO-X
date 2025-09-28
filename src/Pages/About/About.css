@@ -1,0 +1,137 @@
+/* src/Pages/About/About.css */
+
+/* Import Inter font (optional, but recommended) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* --- Glitch Effect for light background --- */
+.glitch-text-light {
+  position: relative;
+  color: #1f2937; /* Dark text on light background */
+  transition: text-shadow 0.3s ease;
+}
+.glitch-text-light:hover {
+  text-shadow: 0.05em 0 0 rgba(0, 255, 255, 0.75),
+               -0.05em 0 0 rgba(255, 0, 0, 0.75),
+               0 0.025em 0 rgba(0, 255, 0, 0.75);
+}
+.glitch-text-light::before,
+.glitch-text-light::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f3f4f6; /* Match the new light background */
+  overflow: hidden;
+  color: #1f2937;
+}
+.glitch-text-light:hover::before {
+  left: 2px;
+  text-shadow: -1px 0 red;
+  animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+.glitch-text-light:hover::after {
+  left: -2px;
+  text-shadow: -1px 0 cyan;
+  animation: glitch-anim-2 2s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip-path: inset(5% 0 90% 0); }
+  20% { clip-path: inset(80% 0 5% 0); }
+  40% { clip-path: inset(30% 0 40% 0); }
+  60% { clip-path: inset(55% 0 10% 0); }
+  80% { clip-path: inset(15% 0 70% 0); }
+  100% { clip-path: inset(90% 0 2% 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip-path: inset(70% 0 25% 0); }
+  20% { clip-path: inset(10% 0 85% 0); }
+  40% { clip-path: inset(60% 0 20% 0); }
+  60% { clip-path: inset(35% 0 30% 0); }
+  80% { clip-path: inset(90% 0 5% 0); }
+  100% { clip-path: inset(45% 0 50% 0); }
+}
+
+/* --- Blob Animation --- */
+@keyframes blob {
+  0% { transform: scale(1) translate(0px, 0px); }
+  33% { transform: scale(1.1) translate(30px, -50px); }
+  66% { transform: scale(0.9) translate(-20px, 20px); }
+  100% { transform: scale(1) translate(0px, 0px); }
+}
+.animate-blob {
+  animation: blob 8s infinite ease-in-out;
+}
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }
+
+/* --- Card Glow Effect --- */
+.interactive-glow-cards > .card {
+  position: relative;
+}
+.interactive-glow-cards:hover > .card::after {
+  opacity: 1;
+}
+.card::before, .card::after {
+  border-radius: inherit;
+  content: "";
+  height: 100%;
+  left: 0px;
+  opacity: 0;
+  position: absolute;
+  top: 0px;
+  transition: opacity 500ms;
+  width: 100%;
+}
+.card::before {
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    rgba(0, 255, 255, 0.15),
+    transparent 40%
+  );
+  z-index: 3;
+}
+.card::after { 
+  background: radial-gradient(
+    400px circle at var(--mouse-x) var(--mouse-y),
+    rgba(0, 255, 255, 0.3),
+    transparent 40%
+  );
+  z-index: 1;
+}
+.card:hover::before {
+  opacity: 1;
+}
+
+/* --- General Animations --- */
+@keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+.animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+
+@keyframes fadeInUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+.animate-fade-in-up { animation: fadeInUp 1s ease-out both; }
+
+@keyframes slideInLeft { 0% { opacity: 0; transform: translateX(-50px); } 100% { opacity: 1; transform: translateX(0); } }
+.animate-slide-in-left { animation: slideInLeft 0.8s ease-out both; }
+
+@keyframes slideInRight { 0% { opacity: 0; transform: translateX(50px); } 100% { opacity: 1; transform: translateX(0); } }
+.animate-slide-in-right { animation: slideInRight 0.8s ease-out both; }
+
+@keyframes slideInUp { 0% { opacity: 0; transform: translateY(50px); } 100% { opacity: 1; transform: translateY(0); } }
+.animate-slide-in-up { animation: slideInUp 0.8s ease-out both; }
+
+@keyframes scaleIn { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+.animate-scale-in { animation: scaleIn 0.8s ease-out both; }
+
+@keyframes pulseSlow { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+.animate-pulse-slow { animation: pulseSlow 4s infinite ease-in-out; }
+
+/* --- 3D transform utilities --- */
+.perspective-1000 { perspective: 1000px; }
+.transform-style-3d { transform-style: preserve-3d; }

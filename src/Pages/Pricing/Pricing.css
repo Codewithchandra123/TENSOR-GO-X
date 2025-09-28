@@ -1,0 +1,76 @@
+/* src/Pages/Pricing/Pricing.css */
+
+/* Define the animated gradient background for the body */
+body.pricing-page-background {
+  background: linear-gradient(-45deg, #070707, #b953c8, #b953c8, #070707);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Glassmorphism Card Style */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05); /* Semi-transparent background */
+  backdrop-filter: blur(12px); /* The magic for the frosted glass effect */
+  -webkit-backdrop-filter: blur(12px); /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border to define the edges */
+  border-radius: 1rem; /* Softer edges */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2); /* Softer shadow for depth */
+}
+
+/* Fallback for browsers that do not support backdrop-filter */
+@supports not (backdrop-filter: blur(12px)) {
+  .glass-card {
+    background: rgba(41, 51, 82, 0.8);
+  }
+}
+
+/* Primary CTA Button Style */
+.cta-primary {
+  background: linear-gradient(90deg, #00BFFF 0%, #1E90FF 100%);
+  color: white;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
+}
+.cta-primary:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(30, 144, 255, 0.4);
+}
+
+/* Secondary CTA Button Style */
+.cta-secondary {
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+.cta-secondary:hover {
+  transform: translateY(-3px);
+  background-color: #e2e8f0;
+}
+
+/* Outline CTA Button Style */
+.cta-outline {
+  background-color: transparent;
+  border: 2px solid #00BFFF;
+  color: #f8fafc;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+.cta-outline:hover {
+  background-color: #00BFFF;
+  color: #0f172a;
+  transform: translateY(-3px);
+}

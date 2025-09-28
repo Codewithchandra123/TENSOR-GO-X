@@ -1,0 +1,11 @@
+/* src/Pages/Integrations/Integrations.css */
+
+/*
+  DEPRECATED: This file is no longer needed.
+
+  All animations like 'fade-in-up' and 'fade-in-fast' have been replaced 
+  with the Framer Motion library for superior performance, interactivity, 
+  and maintainability, as per the project's modern UI/UX guidelines.
+
+  Animations are now defined directly within their respective React components.
+*/

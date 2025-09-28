@@ -1,0 +1,180 @@
+/* src/Pages/Home/DataSection.css */
+
+/* --- Main Section Background --- */
+.data-section {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  background-color: #0f172a;
+  background-image:
+    radial-gradient(at 20% 20%, hsla(212, 96%, 23%, 0.4) 0px, transparent 50%),
+    radial-gradient(at 80% 20%, hsla(262, 87%, 28%, 0.3) 0px, transparent 50%),
+    radial-gradient(at 20% 80%, hsla(343, 87%, 43%, 0.3) 0px, transparent 50%),
+    radial-gradient(at 80% 80%, hsla(165, 87%, 23%, 0.3) 0px, transparent 50%);
+}
+
+/* --- Typography --- */
+.section-heading {
+  font-size: 3rem; /* Tailwind's text-5xl */
+}
+.section-subheading {
+  font-size: 1.125rem; /* Tailwind's text-lg */
+}
+
+/* --- Gradient for the Heading --- */
+.heading-gradient {
+  background: linear-gradient(to right, #38bdf8, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --- Glassmorphism Card Style --- */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2.5rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.card-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #f1f5f9;
+}
+
+/* --- NEW: Chart Container for Responsiveness --- */
+.chart-container {
+  width: 100%;
+  height: 320px; /* Default height for larger screens */
+}
+
+
+/* --- Custom Tooltip Style --- */
+.custom-tooltip {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.custom-tooltip .label {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  color: #fff;
+}
+
+.custom-tooltip .value {
+  font-size: 0.875rem;
+  color: #FFFFFF;
+  opacity: 0.9;
+}
+
+/* --- Data Toggle Switch --- */
+.data-toggle-switch {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 999px;
+  padding: 4px;
+}
+.data-toggle-switch button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: transparent;
+  color: #FFFFFF;
+  font-weight: 500;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap; /* Prevents text from wrapping */
+}
+.data-toggle-switch button.active {
+  background-color: #38bdf8;
+  color: #0f172a;
+  box-shadow: 0 2px 10px rgba(56, 189, 248, 0.4);
+}
+
+/* --- Interactive Legend --- */
+.custom-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1rem;
+  margin-top: 1.5rem;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  opacity: 0.5;
+}
+.legend-item.visible {
+  opacity: 1;
+}
+.legend-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.legend-color-box {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+}
+.legend-item span {
+  color: #FFFFFF;
+  font-size: 0.875rem;
+}
+
+
+/*
+==============================================
+--- NEW: Responsive Media Queries for Mobile ---
+==============================================
+*/
+@media (max-width: 1024px) { /* Corresponds to Tailwind's 'lg' breakpoint */
+
+  .data-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .section-heading {
+    font-size: 2.25rem; /* text-4xl */
+  }
+
+  .section-subheading {
+    font-size: 1rem; /* text-base */
+    margin-bottom: 3rem;
+  }
+
+  .glass-card {
+    padding: 1.5rem;
+  }
+
+  .card-title {
+    font-size: 1.5rem; /* text-2xl */
+  }
+
+  .chart-container {
+    height: 300px; /* A slightly smaller height for tablets and phones */
+  }
+}
+
+@media (max-width: 640px) { /* Corresponds to Tailwind's 'sm' breakpoint */
+  .chart-container {
+      height: 280px; /* Even smaller for very small phones */
+  }
+
+  /* Make sure the text on the bar chart axis doesn't get too cramped */
+  .recharts-cartesian-axis-tick-value tspan {
+    font-size: 11px;
+  }
+}

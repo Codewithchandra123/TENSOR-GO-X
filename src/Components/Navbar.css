@@ -1,0 +1,156 @@
+/* --- Professional Navy/Blue Gradient Theme --- */
+.navbar-gradient {
+  background: linear-gradient(to right, #001f3f, #1e3a8a); /* Navy to Royal Blue */
+}
+
+/* --- Desktop Nav Links --- */
+.nav-link {
+  position: relative;
+  font-weight: 500;
+  color: #e2e8f0; 
+  transition: color 0.3s;
+  padding-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+.nav-link::before {
+  content: '→';
+  position: absolute;
+  left: -20px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  color: #f5f5f4; 
+}
+.nav-link:hover::before {
+  opacity: 1;
+  left: -15px;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, #22d3ee, #cb35c1); 
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.nav-link:hover, .nav-link.active {
+  color: rgb(49, 236, 239); 
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+.nav-link.active {
+  color: #c5ee22; 
+}
+
+/* --- Desktop Dropdown --- */
+.dropdown-container {
+  background: linear-gradient(to bottom right, #001f3f, #111827); 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-top: 2px solid #aaee22; 
+}
+.dropdown-link {
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  color: #e2e8f0; 
+  transition: all 0.2s ease-in-out;
+  display: block;
+  text-align: left;
+}
+.dropdown-link:hover {
+  background-color: rgba(34, 211, 238, 0.1); 
+  color: white;
+  transform: translateX(5px);
+}
+
+/* --- Mobile Dropdown Links --- */
+.mobile-dropdown-link {
+  padding: 0.75rem 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #e2e8f0; 
+  width: 100%;
+}
+.mobile-dropdown-link.active {
+  color: #22d3ee; 
+  font-weight: 600;
+}
+
+/* --- Contact Button (Rounded Rectangle) --- */
+.contact-button {
+  position: relative; /* Added for pseudo-element positioning */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; 
+  padding: 0.75rem 1.75rem;
+  border-radius: 0.5rem; 
+  font-weight: 600;
+  background-color: #1e293b; /* slate-800 */
+  color: #e2e8f0; /* slate-200 */
+  border: 2px solid transparent; 
+  transition: all 0.3s ease;
+}
+
+/* Added for arrow animation */
+.contact-button::before {
+  content: '→';
+  position: absolute;
+  left: 0px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  color: #f5f5f4;
+}
+
+.contact-button:hover::before {
+  opacity: 1;
+  left: 10px;
+}
+
+.contact-button:hover {
+  background-color: #334155; /* slate-700 */
+  transform: scale(1.05);
+}
+
+/* --- Get Started Button (Rounded Rectangle) --- */
+.cta-button {
+  position: relative; /* Added for pseudo-element positioning */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.75rem;
+  border-radius: 0.5rem;     /* Rounded rectangle */
+  font-weight: 600;
+  background-image: linear-gradient(to right, #8b5cf6 0%, #f94b00 50%, #8b5cf6 100%);
+  background-size: 200% auto;
+  color: white;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 4px 15px 0 rgba(139, 92, 246, 0.4);
+  border: 2px solid transparent; 
+}
+
+/* Added for arrow animation */
+.cta-button::before {
+  content: '→';
+  position: absolute;
+  left: 0px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  color: #f5f5f4;
+}
+
+.cta-button:hover::before {
+  opacity: 1;
+  left: 10px;
+}
+
+.cta-button:hover {
+  background-position: right center; 
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(204, 226, 9, 0.91);
+}

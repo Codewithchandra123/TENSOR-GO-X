@@ -1,0 +1,36 @@
+/* src/Pages/HowItWorks/HowItWorks.css */
+
+.text-reveal > span {
+  display: inline-block;
+  overflow: hidden;
+  animation: reveal 0.75s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+@keyframes reveal {
+  0% { transform: translate(0, 100%); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes blob {
+  0% { transform: scale(1) translate(0, 0); }
+  33% { transform: scale(1.1) translate(30px, -50px); }
+  66% { transform: scale(0.9) translate(-20px, 20px); }
+  100% { transform: scale(1) translate(0, 0); }
+}
+
+.animate-blob { animation: blob 6s infinite ease-in-out; }
+.animation-delay-2000 { animation-delay: 2s; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up { animation: fadeInUp 0.5s ease-out forwards; }
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-scale-in { animation: scaleIn 0.4s ease-out forwards; }

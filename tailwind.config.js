@@ -1,12 +1,12 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
-      // Your existing custom colors
+      // --- CUSTOM COLORS ---
       colors: {
         'primary-deep-blue': '#004AAD',
         'primary-teal': '#007B80',
@@ -17,26 +17,39 @@ export default {
         'text-dark-gray': '#333333',
         'text-black': '#0A0A0A',
       },
-      // Your existing custom fonts
+      // --- CUSTOM FONTS ---
       fontFamily: {
         body: ["'Open Sans'", "sans-serif"],
         headings: ["Poppins", "sans-serif"],
+        sans: ["Inter", "Poppins", "ui-sans-serif", "system-ui"],
       },
-      // --- MERGED ANIMATIONS ---
+      // --- KEYFRAMES ---
       keyframes: {
         fadeIn: { '0%': { opacity: 0 }, '100%': { opacity: 1 } },
-        fadeInUp: { '0%': { opacity: 0, transform: 'translateY(20px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
-        slideInDown: { '0%': { opacity: 0, transform: 'translateY(-20px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
-        slideInRight: { '0%': { opacity: 0, transform: 'translateX(50px)' }, '100%': { opacity: 1, transform: 'translateX(0)' } },
+        fadeInUp: {
+          '0%': { opacity: 0, transform: 'translateY(20px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+        slideInDown: {
+          '0%': { opacity: 0, transform: 'translateY(-20px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+        slideInRight: {
+          '0%': { opacity: 0, transform: 'translateX(50px)' },
+          '100%': { opacity: 1, transform: 'translateX(0)' },
+        },
         blob: {
-          '0%, 100%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(1.2)' },
+          '0%': { transform: 'translate(0px, 0px) scale(1)' },
+          '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+          '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+          '100%': { transform: 'translate(0px, 0px) scale(1)' },
         },
         pulseShadow: {
           '0%, 100%': { textShadow: '0 0 5px rgba(255,255,255,0.7)' },
           '50%': { textShadow: '0 0 15px rgba(255,255,255,1)' },
         },
       },
+      // --- ANIMATIONS ---
       animation: {
         'fade-in': 'fadeIn 0.8s ease-out forwards',
         'fade-in-up': 'fadeInUp 1s ease-out forwards',
@@ -47,5 +60,7 @@ export default {
       },
     },
   },
-  plugins: [],
-}
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
+};
