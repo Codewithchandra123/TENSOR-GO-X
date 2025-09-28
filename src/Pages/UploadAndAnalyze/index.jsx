@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react'; // Removed useEffect as it's no longer needed
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaFileAlt, FaArrowRight } from 'react-icons/fa';
 
@@ -7,7 +7,7 @@ import DropzoneContent from './components/DropzoneContent';
 import AnalysisReport from './components/AnalysisReport';
 import ReportPlaceholder from './components/ReportPlaceholder';
 import Charts from './components/Charts';
-import ScrollProgressBar from './components/ScrollProgressBar';
+// ✅ REMOVED: ScrollProgressBar import is no longer needed
 import { emotionsDataTemplate, engagementDataTemplate } from './data';
 
 import './UploadAndAnalyze.css';
@@ -28,14 +28,13 @@ const UploadAndAnalyze = () => {
   const emotionsData = analysisResult?.emotionsData || emotionsDataTemplate;
   const engagementData = analysisResult?.engagementData || engagementDataTemplate;
 
-  useEffect(() => {
-    document.body.className = 'upload-page-background';
-    return () => { document.body.className = ''; };
-  }, []);
+  // ✅ REMOVED: The useEffect hook that modified the body className has been removed.
+  // This component will now inherit the background from your global styles.
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 sm:px-8 lg:px-16">
-      <ScrollProgressBar />
+    // This container correctly centers the content block on the page without creating a full layout
+    <div className="w-full max-w-6xl mx-auto px-4 sm:px-8 lg:px-16 py-12 md:py-16">
+      {/* ✅ REMOVED: The <ScrollProgressBar /> component is gone. */}
 
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -43,7 +42,7 @@ const UploadAndAnalyze = () => {
         transition={{ duration: 0.5 }}
         className="glass-pane p-6 sm:p-10 shadow-xl"
       >
-        {/* Header */}
+        {/* Header Section (Content Title) */}
         <motion.h1
           className="font-bold text-4xl sm:text-5xl md:text-7xl text-white mb-2 text-center md:text-left leading-tight tracking-tight"
           initial={{ opacity: 0, y: -30 }}
@@ -69,6 +68,7 @@ const UploadAndAnalyze = () => {
           whileHover={{ scale: 1.06, rotate: 2 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => {
+            // This smooth scroll is fine as it targets a location within the component's context
             document.documentElement.scrollTo({ top: 360, behavior: 'smooth' });
           }}
         >
@@ -78,7 +78,7 @@ const UploadAndAnalyze = () => {
           </span>
         </motion.button>
 
-        {/* Main Content */}
+        {/* Main Content (Dropzone and Report) */}
         <div className="flex flex-col md:flex-row gap-8 mt-4">
           {/* Dropzone Section */}
           <div className="flex-1 flex flex-col">

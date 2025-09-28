@@ -6,7 +6,7 @@
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
   padding: 2rem;
-  /* padding-top: 6rem; */ /* ✅ REMOVED: This was causing the unwanted gap above the navbar. */
+  /* ✅ REMOVED: padding-top rule that created an extra gap. */
   padding-bottom: 6rem;   /* This remains to keep space above the footer. */
   min-height: 100vh;
 }
@@ -25,7 +25,7 @@
   box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: transform .2s cubic-bezier(.23, 1.16, .48, .84), box-shadow .2s;
-  margin-top: 6rem; /* ✅ ADDED: This creates the necessary space below the sticky navbar. */
+  margin-top: 6rem; /* ✅ This is the correct way to add space below a sticky/fixed navbar. */
   padding: 1rem;
   word-wrap: break-word;
   overflow-x: hidden;

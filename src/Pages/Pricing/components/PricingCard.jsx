@@ -1,11 +1,12 @@
-// src/Pages/Pricing/components/PricingCard.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckIcon } from '../data';
 
-const PricingCard = ({ plan, billingCycle, index }) => {
+// ✅ 1. Accept the onCtaClick function as a prop.
+const PricingCard = ({ plan, billingCycle, index, onCtaClick }) => {
   const price = plan.price[billingCycle];
   
+  // All your animation variants are preserved.
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -26,6 +27,7 @@ const PricingCard = ({ plan, billingCycle, index }) => {
   };
 
   return (
+    // All your motion props and class names (including hover effects) are preserved.
     <motion.div
       variants={cardVariants}
       className={`glass-card p-8 h-full flex flex-col relative transition-transform duration-300 hover:-translate-y-2 ${plan.isPopular ? 'border-2 border-cyan-400' : ''}`}
@@ -52,7 +54,12 @@ const PricingCard = ({ plan, billingCycle, index }) => {
           </li>
         ))}
       </ul>
-      <button className={`w-full mt-8 ${ctaClassMap[plan.ctaVariant]}`}>
+
+      {/* ✅ 2. The onClick handler is added here. It calls the function from the parent. */}
+      <button
+        onClick={() => onCtaClick(plan.ctaAction)}
+        className={`w-full mt-8 ${ctaClassMap[plan.ctaVariant]}`}
+      >
         {plan.cta}
       </button>
     </motion.div>
