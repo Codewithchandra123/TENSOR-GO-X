@@ -26,6 +26,36 @@ const DesktopDropdown = ({ title, children, activePaths }) => { const [isOpen, s
 const MobileDropdown = ({ title, children, activePaths, closeParentMenu }) => { const [isOpen, setIsOpen] = useState(false); const location = useLocation(); const isActive = activePaths.includes(location.pathname); const childrenWithProps = React.Children.map(children, child => React.isValidElement(child) ? React.cloneElement(child, { onClick: closeParentMenu }) : child); return ( <div className="w-full"><button onClick={() => setIsOpen(!isOpen)} className={`w-full flex justify-between items-center text-2xl font-semibold py-4 transition-colors duration-300 ${isActive ? 'text-sky-400' : 'text-slate-200'}`}><span>{title}</span><ChevronDownIcon isOpen={isOpen} /></button><AnimatePresence>{isOpen && ( <motion.div className="overflow-hidden" initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} transition={{ duration: 0.3 }}><div className="flex flex-col items-start pt-2 pl-6 border-l-2 border-slate-700">{childrenWithProps}</div></motion.div> )}</AnimatePresence></div> ); };
 
 
+// --- HELPER COMPONENTS FOR MOBILE MENU ---
+// Define a style for the root mobile NavLinks (large and centered)
+const MobileRootNavLink = ({ to, children, onClick }) => {
+    const location = useLocation();
+    const isActive = location.pathname === to;
+    return (
+        <NavLink 
+            to={to} 
+            onClick={onClick} 
+            className={`text-2xl font-semibold py-4 transition-colors duration-300 w-full text-center ${isActive ? 'text-sky-400' : 'text-slate-200'} hover:text-sky-400`}
+        >
+            {children}
+        </NavLink>
+    );
+};
+
+// Define a style for links inside the MobileDropdown (smaller than root links)
+const MobileDropdownLink = ({ to, children, onClick }) => {
+    return (
+        <NavLink 
+            to={to} 
+            onClick={onClick} 
+            className="text-xl py-2 my-1 text-slate-300 hover:text-sky-400 transition-colors duration-300 w-full text-left"
+        >
+            {children}
+        </NavLink>
+    );
+};
+
+
 // --- NAVBAR COMPONENT ---
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,7 +77,7 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 navbar-gradient shadow-lg shadow-blue-900/10">
       <div className="container mx-auto flex justify-between items-center px-4 sm:px-6 py-3">
 
-        {/* ✅ 2. LOGO AND TEXT SECTION - UPDATED TO USE THE PNG IMAGE */}
+        {/* ✅ 2. LOGO AND TEXT SECTION - FIX: Removed 'hidden sm:flex' from text container */}
         <Link to="/" className="flex-shrink-0" onClick={closeMenu}>
           <motion.div
             className="flex items-center gap-3 cursor-pointer"
@@ -63,8 +93,8 @@ const Navbar = () => {
               className="h-12 w-auto" // Adjust height here, width will scale automatically
             />
             
-            {/* The Text - its container is crucial for alignment */}
-            <div className="hidden sm:flex flex-col justify-center">
+            {/* 💡 FIX APPLIED HERE: Removed 'hidden sm:flex' and changed to just 'flex' */}
+            <div className="flex flex-col justify-center">
               <span className="text-2xl font-bold text-slate-100 tracking-wider leading-none">
                 <span className="text-sky-400">Tensor</span>
                 <span className="text-amber-500">Go</span>
@@ -86,7 +116,7 @@ const Navbar = () => {
           </DesktopDropdown>
         </nav>
 
-        {/* --- AUTH BUTTONS (UNCHANGED) --- */}
+        {/* --- AUTH BUTTONS (UNCHANGED for DESKTOP) --- */}
         <div className="hidden lg:flex items-center space-x-6">
           {user ? (
             <button onClick={handleLogout} className="cta-button flex items-center justify-center">
@@ -109,12 +139,50 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* --- MOBILE MENU PANEL (UNCHANGED) --- */}
+      {/* --- MOBILE MENU PANEL: FIX APPLIED HERE to populate and align --- */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div className="lg:hidden fixed inset-0 navbar-gradient" initial="closed" animate="open" exit="closed" variants={menuVariants}>
-            <nav className="flex flex-col items-center justify-center h-full space-y-2 px-8">
-                {/* (Mobile nav content is unchanged) */}
+            {/* Added w-full and max-w-sm mx-auto for better mobile alignment and centered content */}
+            <nav className="flex flex-col items-start justify-start pt-24 space-y-2 px-8 w-full max-w-sm mx-auto"> 
+
+                <MobileRootNavLink to="/" onClick={closeMenu}>Home</MobileRootNavLink>
+                
+                <MobileDropdown title="Company" activePaths={['/about', '/careers']} closeParentMenu={closeMenu}>
+                    <MobileDropdownLink to="/about" onClick={closeMenu}>About Us</MobileDropdownLink>
+                    <MobileDropdownLink to="/careers" onClick={closeMenu}>Careers</MobileDropdownLink>
+                </MobileDropdown>
+
+                <MobileDropdown title="Product" activePaths={['/features', '/how-it-works', '/integrations']} closeParentMenu={closeMenu}>
+                    <MobileDropdownLink to="/features" onClick={closeMenu}>Features</MobileDropdownLink>
+                    <MobileDropdownLink to="/how-it-works" onClick={closeMenu}>How It Works</MobileDropdownLink>
+                    <MobileDropdownLink to="/integrations" onClick={closeMenu}>Integrations</MobileDropdownLink>
+                </MobileDropdown>
+
+                <MobileDropdown title="Demo" activePaths={['/demo', '/upload']} closeParentMenu={closeMenu}>
+                    <MobileDropdownLink to="/demo" onClick={closeMenu}>Live Demo</MobileDropdownLink>
+                    <MobileDropdownLink to="/upload" onClick={closeMenu}>Upload & Analyze</MobileDropdownLink>
+                </MobileDropdown>
+
+                <MobileDropdown title="Resources" activePaths={['/pricing', '/contact']} closeParentMenu={closeMenu}>
+                    <MobileDropdownLink to="/pricing" onClick={closeMenu}>Start Your Journey</MobileDropdownLink>
+                    <MobileDropdownLink to="/contact" onClick={closeMenu}>Contact</MobileDropdownLink>
+                </MobileDropdown>
+
+                {/* Mobile Auth Buttons: Added inside the menu, using full width and consistent mobile styling */}
+                <div className="flex flex-col items-center space-y-4 pt-10 w-full">
+                    {user ? (
+                        <button onClick={handleLogout} className="cta-button w-full flex items-center justify-center text-xl py-3 rounded-lg">
+                            <BiLogOut className="mr-2" />
+                            Logout
+                        </button>
+                    ) : (
+                        <>
+                            <Link to="/signup" className="contact-button w-full text-center text-xl py-3 rounded-lg" onClick={closeMenu}>Sign Up</Link>
+                            <Link to="/login" className="cta-button w-full text-center text-xl py-3 rounded-lg" onClick={closeMenu}>Login</Link>
+                        </>
+                    )}
+                </div>
             </nav>
           </motion.div>
         )}
