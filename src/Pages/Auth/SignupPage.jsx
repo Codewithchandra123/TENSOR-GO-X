@@ -81,10 +81,10 @@ const SignupPage = () => {
             >
                 <motion.div className="text-center" variants={itemVariants}>
                     <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-lime-300">
-                        Create Account
+                        Create A New Account
                     </h1>
                     <p className="text-lg text-slate-300 mt-2">
-                        For AI - Analysis Console
+                        Enter your details and signup
                     </p>
                 </motion.div>
 

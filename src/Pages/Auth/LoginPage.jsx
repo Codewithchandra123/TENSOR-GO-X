@@ -93,9 +93,9 @@ const LoginPage = () => {
                 {/* ... The rest of your JSX remains the same ... */}
                  <motion.div className="text-center" variants={itemVariants}>
                     <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-indigo-400">
-                        Welcome Back
+                        Welcome Back TO TensorGo
                     </h1>
-                    <p className="text-lg text-slate-300 mt-2">Login to the AI - Analysis Console</p>
+                    <p className="text-lg text-slate-300 mt-2">Enter your details and login</p>
                 </motion.div>
 
                 {error && <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-red-400 text-center font-medium bg-red-900/30 p-3 rounded-lg border border-red-800">{error}</motion.p>}
@@ -154,7 +154,7 @@ const LoginPage = () => {
                             {resetMessage ? (
                                 <p className="text-center text-green-400">{resetMessage}</p>
                             ) : (
-                                <p className="text-center text-slate-400">Enter your email to receive a password reset link.</p>
+                                <p className="text-center text-slate-400">Enter Your Email To Generate Otp.</p>
                             )}
                             
                             <form onSubmit={handlePasswordReset} className="space-y-4">
