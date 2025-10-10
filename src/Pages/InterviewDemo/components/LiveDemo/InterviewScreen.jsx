@@ -1,5 +1,5 @@
 // src/Pages/InterviewDemo/components/LiveDemo/InterviewScreen.jsx
-
+import { Link } from "react-router-dom";
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
     FaRegEye, FaHeartbeat, FaComments, FaLightbulb, FaRegSmile, FaUserCheck,
@@ -261,9 +261,14 @@ const InterviewScreen = () => {
                                 <motion.button onClick={() => downloadReport(report)} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full flex items-center justify-center px-4 py-3 font-bold text-white bg-sky-600 rounded-lg text-base">
                                     <FaDownload className="mr-2" /> Download
                                 </motion.button>
-                                <motion.a href="/upload" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full flex items-center justify-center px-4 py-3 font-bold text-white bg-purple-600 rounded-lg text-base">
-                                    <FaCloudUploadAlt className="mr-2" /> Upload
-                                </motion.a>
+                               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                                    <Link 
+                                        to="/upload"
+                                        className="w-full flex items-center justify-center px-4 py-3 font-bold text-white bg-purple-600 rounded-lg text-base"
+                                    >
+                                        <FaCloudUploadAlt className="mr-2" /> Upload
+                                    </Link>
+                                </motion.div>
                                 <motion.button onClick={handleStartOver} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full flex items-center justify-center px-4 py-3 font-bold text-white bg-indigo-600 rounded-lg text-base">
                                     <FaRedo className="mr-2" /> New Interview
                                 </motion.button>
