@@ -1,77 +1,83 @@
-// src/Pages/InterviewDemo/hooks/useSpeechSynthesis.js
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 export const useSpeechSynthesis = () => {
   const [isSpeaking, setIsSpeaking] = useState(false);
+  // Store voices in state to trigger re-renders when they load
+  const [voices, setVoices] = useState([]);
   const synthRef = useRef(null);
 
   useEffect(() => {
     // Initialize the speech synthesis API
-    synthRef.current = window.speechSynthesis;
+    const synth = window.speechSynthesis;
+    synthRef.current = synth;
 
-    // The voices load asynchronously. We need an event listener
-    // to know when they are available to be used.
-    const handleVoicesChanged = () => {
-      // No action needed here, but this event ensures voices are loaded.
-      // We can log them for debugging if needed.
-      // console.log(synthRef.current.getVoices());
+    const updateVoices = () => {
+      setVoices(synth.getVoices());
     };
 
-    if (synthRef.current) {
-      synthRef.current.addEventListener('voiceschanged', handleVoicesChanged);
-    }
+    // Load voices immediately if available
+    updateVoices();
     
-    // Cleanup function to remove the event listener
+    // Subscribe to the event that fires when voices are loaded
+    synth.addEventListener('voiceschanged', updateVoices);
+
+    // Cleanup function
     return () => {
-      if (synthRef.current) {
-        synthRef.current.removeEventListener('voiceschanged', handleVoicesChanged);
-        // Ensure any ongoing speech is stopped when the component unmounts
-        synthRef.current.cancel();
+      synth.removeEventListener('voiceschanged', updateVoices);
+      if (synth.speaking) {
+        synth.cancel(); // Stop any speech on unmount
       }
     };
   }, []);
 
-  const speak = (text) => {
+  const speak = useCallback((text) => {
     if (!synthRef.current || !text) {
       console.error("Speech Synthesis not available or no text provided.");
       return;
     }
 
-    // If it's already speaking, stop the current utterance before starting a new one
-    if (isSpeaking) {
+    // Cancel any ongoing speech to prevent overlap
+    if (synthRef.current.speaking) {
       synthRef.current.cancel();
     }
     
-    // Create a new speech utterance
     const utterance = new SpeechSynthesisUtterance(text);
 
-    // --- Voice Selection for a Professional Sound ---
-    // We try to find a clear, high-quality voice.
-    const voices = synthRef.current.getVoices();
-    let selectedVoice = voices.find(voice => voice.name.includes('Google US English'));
+    // --- Voice Selection ---
+    // Use the voices from the state, which are guaranteed to be loaded
+    let selectedVoice = voices.find(voice => voice.name === 'Google US English');
     if (!selectedVoice) {
+      selectedVoice = voices.find(voice => voice.lang === 'en-US' && !voice.name.includes('Google'));
+    }
+     if (!selectedVoice) {
       selectedVoice = voices.find(voice => voice.lang === 'en-US');
     }
-    utterance.voice = selectedVoice || voices[0]; // Fallback to the first available voice
+    
+    utterance.voice = selectedVoice || voices[0]; // Fallback to first available
     utterance.pitch = 1;
-    utterance.rate = 0.95; // Slightly slower for better clarity
+    utterance.rate = 0.95;
     utterance.volume = 1;
 
-    // Event listeners for the utterance itself
+    // Set state correctly on start and end
     utterance.onstart = () => setIsSpeaking(true);
     utterance.onend = () => setIsSpeaking(false);
-    utterance.onerror = () => setIsSpeaking(false);
+    utterance.onerror = (event) => {
+      console.error("SpeechSynthesisUtterance.onerror", event);
+      setIsSpeaking(false);
+    };
 
-    // Speak the text
     synthRef.current.speak(utterance);
-  };
+  }, [voices]); // Depend on voices, so it re-renders with the correct voice list
   
-  const stop = () => {
-      if (synthRef.current && isSpeaking) {
-          synthRef.current.cancel();
-          setIsSpeaking(false);
-      }
-  }
+  const stop = useCallback(() => {
+    if (synthRef.current) {
+        // Calling cancel will trigger the 'onend' event of the utterance,
+        // which will then set isSpeaking to false.
+        synthRef.current.cancel();
+        // We can also set it manually for immediate feedback, just in case.
+        setIsSpeaking(false);
+    }
+  }, []);
 
   return { speak, stop, isSpeaking };
 };

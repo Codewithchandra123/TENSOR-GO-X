@@ -21,6 +21,7 @@ html, body, #root {
   width: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 body {
@@ -116,4 +117,71 @@ body {
   0% { border-color: var(--danger-color); }
   50% { border-color: rgba(239, 68, 68, 0.5); }
   100% { border-color: var(--danger-color); }
+}
+
+/*
+--- MOBILE RESPONSIVENESS ---
+*/
+@media (max-width: 768px) {
+  /* General layout adjustments */
+  .p-4 {
+    padding: 1rem;
+  }
+  .sm\:p-6 {
+    padding: 1.5rem;
+  }
+
+  /* Make sure the main content area doesn't shrink too much */
+  .relative.min-h-screen {
+    padding: 1.5rem 1rem;
+  }
+
+  /* Adjust the 'Start Over' button for smaller screens */
+  .absolute.top-4.left-4 {
+    top: 1rem;
+    left: 1rem;
+  }
+
+  /* Target generic card-like containers inside your components if they exist */
+  .card-container {
+    padding: 1rem;
+    width: 100%;
+    max-width: 95vw;
+  }
+
+  /* Adjust typography to prevent overflow */
+  h1, .text-4xl {
+    font-size: 2rem; /* 32px */
+    line-height: 2.5rem;
+  }
+  
+  h2, .text-3xl {
+    font-size: 1.5rem; /* 24px */
+    line-height: 2rem;
+  }
+
+  /* Make the proctoring warning more mobile-friendly */
+  .proctoring-warning {
+    width: 90%;
+    top: 1rem;
+    padding: 0.75rem 1rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  /* More aggressive adjustments for very small screens */
+  .relative.min-h-screen {
+    padding: 1rem 0.5rem;
+  }
+
+  h1, .text-4xl {
+    font-size: 1.875rem; /* 30px */
+    line-height: 2.25rem;
+  }
+
+  h2, .text-3xl {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.75rem;
+  }
 }

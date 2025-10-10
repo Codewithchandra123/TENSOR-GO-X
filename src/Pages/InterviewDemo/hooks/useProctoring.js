@@ -1,19 +1,20 @@
-// src/Pages/InterviewDemo/hooks/useProctoring.js
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 const CURSOR_INACTIVITY_LIMIT = 120000; // 120,000 ms = 2 minutes
 const HEAD_TURN_SIMULATION_INTERVAL = 45000; // Check every 45 seconds
 
 export const useProctoring = (isInterviewActive) => {
-  const [warning, setWarning] = useState(null); // e.g., { type: 'Cursor', message: '...' }
+  const [warning, setWarning] = useState(null);
   const [warningCount, setWarningCount] = useState(0);
 
+  // Use refs for timers to avoid re-renders and easily manage them
   const inactivityTimer = useRef(null);
   const headTurnSimulator = useRef(null);
   const warningClearer = useRef(null);
 
+  // Memoize the warning function to ensure it has a stable identity
   const issueWarning = useCallback((type, message) => {
-    // Prevent multiple warnings from showing at once
+    // Clear any pending warning-clearing timer to avoid race conditions
     clearTimeout(warningClearer.current);
 
     setWarning({ type, message });
@@ -23,8 +24,9 @@ export const useProctoring = (isInterviewActive) => {
     warningClearer.current = setTimeout(() => {
       setWarning(null);
     }, 5000);
-  }, []);
+  }, []); // No dependencies needed as it only uses setState and refs
 
+  // This function is now only responsible for restarting the timer logic
   const resetInactivityTimer = useCallback(() => {
     clearTimeout(inactivityTimer.current);
     inactivityTimer.current = setTimeout(() => {
@@ -32,38 +34,32 @@ export const useProctoring = (isInterviewActive) => {
     }, CURSOR_INACTIVITY_LIMIT);
   }, [issueWarning]);
 
-  // Effect to manage all proctoring listeners and timers
   useEffect(() => {
-    if (isInterviewActive) {
-      // --- Start Monitoring ---
-      
-      // 1. Cursor Inactivity
-      document.addEventListener('mousemove', resetInactivityTimer);
-      resetInactivityTimer(); // Start the timer initially
-
-      // 2. Head Movement Simulation
-      headTurnSimulator.current = setInterval(() => {
-        // Simulate a random chance of the user "looking away"
-        if (Math.random() < 0.15) { // 15% chance every interval
-          issueWarning('Head Position', 'Please maintain eye contact with the camera.');
-        }
-      }, HEAD_TURN_SIMULATION_INTERVAL);
-
-    } else {
-      // --- Stop Monitoring ---
-      clearTimeout(inactivityTimer.current);
-      clearInterval(headTurnSimulator.current);
-      clearTimeout(warningClearer.current);
-      document.removeEventListener('mousemove', resetInactivityTimer);
-    }
-
-    // Cleanup function for when the component unmounts or isInterviewActive changes
-    return () => {
+    // Define cleanup logic in one place
+    const cleanup = () => {
       clearTimeout(inactivityTimer.current);
       clearInterval(headTurnSimulator.current);
       clearTimeout(warningClearer.current);
       document.removeEventListener('mousemove', resetInactivityTimer);
     };
+
+    if (isInterviewActive) {
+      // --- Start Monitoring ---
+      document.addEventListener('mousemove', resetInactivityTimer);
+      resetInactivityTimer(); // Initial start
+
+      headTurnSimulator.current = setInterval(() => {
+        if (Math.random() < 0.15) { // 15% chance
+          issueWarning('Head Position', 'Please maintain eye contact with the camera.');
+        }
+      }, HEAD_TURN_SIMULATION_INTERVAL);
+
+      // Return the cleanup function to be called when isInterviewActive becomes false or the component unmounts
+      return cleanup;
+    }
+    // If isInterviewActive is false, the cleanup from the previous render will have already run.
+    // No 'else' block is needed.
+
   }, [isInterviewActive, resetInactivityTimer, issueWarning]);
 
   const resetProctoring = () => {
